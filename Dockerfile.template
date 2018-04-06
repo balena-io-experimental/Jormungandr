@@ -1,0 +1,23 @@
+FROM resin/%%RESIN_MACHINE_NAME%%-node
+WORKDIR /usr/src/app
+COPY log.yml log.yml
+RUN echo "---" > log.yml
+RUN echo "- event: pushed" >> log.yml
+RUN echo "  time: `date -Ins`" >> log.yml
+RUN apt-get update && apt-get install -yq \
+    git ssh apt-utils python python-sn3218 python-st7036 python-pip build-essential && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN echo "- event: aptted" >> log.yml
+RUN echo "  time: `date -Ins`" >> log.yml
+RUN pip install dot3k
+RUN echo "- event: pipped" >> log.yml
+RUN echo "  time: `date -Ins`" >> log.yml
+COPY package.json package.json
+RUN npm install
+RUN echo "- event: npmed" >> log.yml
+RUN echo "  time: `date -Ins`" >> log.yml
+COPY do.sh do.sh
+COPY display.js display.js
+RUN echo "- event: built" >> log.yml
+RUN echo "  time: `date -Ins`" >> log.yml
+CMD ["sh", "do.sh"]

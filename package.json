@@ -1,0 +1,13 @@
+{
+  "name": "jormungandr",
+  "version": "0.0.1",
+  "description": "A device that updates itself.",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "jvsdisplayotron": "^1.1.0",
+    "lodash": "^4.17.5",
+    "moment": "^2.22.0",
+    "read-yaml": "^1.1.0"
+  }
+}
